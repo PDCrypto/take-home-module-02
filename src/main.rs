@@ -58,10 +58,11 @@ impl BuyerGroup {
     fn buy (&mut self, idx: usize , cur_seller: &mut Seller) {
         match self.members.get_mut(idx) {
             Some(cur_buyer) => {
-                while cur_buyer.balance < cur_seller.price {
+                while cur_buyer.balance >= cur_seller.price {
                     cur_buyer.balance -= cur_seller.price;
                     cur_seller.balance += cur_seller.price;
                 }
+                println!("Seller's balance is {}",  cur_seller.balance);
             },
             None => println!("No Buyer!"),
         }
